@@ -1,0 +1,32 @@
+{
+  "dependencies": {
+    "node": "^22.7.0"
+  },
+  "name": "hardhat",
+  "description": "Final assignment for Smart Contract course in BCU23D. It is a voting system for favorite record.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox-viem": "^3.0.0",
+    "hardhat": "^2.22.10"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tonilingardsson/bcu23d-solidity-voting-system.git"
+  },
+  "keywords": [
+    "bcu23d",
+    "solidity",
+    "smartcontract",
+    "node"
+  ],
+  "author": "Antonio Lingardsson Luna",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tonilingardsson/bcu23d-solidity-voting-system/issues"
+  },
+  "homepage": "https://github.com/tonilingardsson/bcu23d-solidity-voting-system#readme"
+}
