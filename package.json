@@ -8,7 +8,9 @@
   "main": "index.js",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox-viem": "^3.0.0",
-    "hardhat": "^2.22.10"
+    "chai": "^5.1.1",
+    "hardhat": "^2.22.10",
+    "mocha": "^10.7.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
