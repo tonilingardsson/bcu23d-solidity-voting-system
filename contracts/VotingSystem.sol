@@ -3,6 +3,21 @@ pragma solidity ^0.8.0;
 
 contract VotingSystem {
         // Define the structures, variables, and mappings here
+        struct Poll {
+            address creator;
+            string[] recordList;
+            uint startTime;
+            uint endTime;
+            mapping (string => uint) votes;
+            bool isPollActive;
+            bool isPollEnded;
+        }
+
+uint public pollCount = 0;
+mapping(uint => Poll) public polls;
+mapping (address => mapping(uint => bool)) public hasVoted;
+
+enum PollStatus { NotStarted, Ongoing, Ended}
 
     // Constructor
     constructor() {
