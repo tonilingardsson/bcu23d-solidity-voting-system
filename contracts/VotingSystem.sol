@@ -72,4 +72,46 @@ contract VotingSystem {
 
         emit VoteCast(_pollId, msg.sender, _songName);
     }
+
+    function countVotes(uint _pollId) public onlyCreator(_pollId) {
+        require(polls[_pollId].isPollActive, "Poll is not active");
+        require(
+            block.timestamp > polls[_pollId].endTime,
+            "Voting is still going on"
+        );
+        polls[_pollId].isPollActive = false;
+        polls[_pollId].isPollEnded = true;
+
+        string memory winningSong;
+        uint winningVoteCount = 0;
+
+        Poll storage poll = polls[_pollId];
+        for (uint i = 0; i < poll.songList.length; i++) {
+            string memory song = poll.songList[i];
+            uint voteCount = poll.votes[song];
+            if (voteCount > winningVoteCount) {
+                winningVoteCount = voteCount;
+                winningSong = song;
+            }
+        }
+
+        emit PollEnded(_pollId, winningSong);
+    }
+
+    function getWinner(uint _pollId) public view returns (string memory) {
+        require(polls[_pollId].isPollEnded, "Poll is not ended yet");
+        string memory winningSong;
+        uint winningVoteCount = 0;
+
+        Poll storage poll = polls[_pollId];
+        for (uint i = 0; i < poll.songList.length; i++) {
+            string memory song = poll.songList[i];
+            uint voteCount = poll.votes[song];
+            if (voteCount > winningVoteCount) {
+                winningVoteCount = voteCount;
+                winningSong = song;
+            }
+        }
+        return winningSong;
+    }
 }
