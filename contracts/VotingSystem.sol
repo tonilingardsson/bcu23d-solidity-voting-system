@@ -5,7 +5,7 @@ contract VotingSystem {
     // Define the structures, variables, and mappings here
     struct Poll {
         address creator;
-        string[] recordList;
+        string[] songList;
         uint startTime;
         uint endTime;
         mapping(string => uint) votes;
@@ -30,13 +30,13 @@ contract VotingSystem {
 
     // Define functions to create poll, start poll, cast vote, count votes, and get winner here
     function createPoll(
-        string[] memory _recordList,
+        string[] memory _songList,
         uint _votingDuration
     ) public {
         pollCount++;
         Poll storage newPoll = polls[pollCount];
         newPoll.creator = msg.sender;
-        newPoll.recordList = _recordList;
+        newPoll.songList = _songList;
         newPoll.startTime = block.timestamp;
         newPoll.endTime = newPoll.startTime + _votingDuration;
         newPoll.isPollActive = true;
@@ -60,5 +60,16 @@ contract VotingSystem {
             "Voting has nort started yet"
         );
         emit PollStarted(_pollId, block.timestamp);
+    }
+
+    function castVote(uint _pollId, string memory _songName) public {
+        require(polls[_pollId].isPollActive, "Poll is not active");
+        require(
+            block.timestamp <= polls[_pollId].endTime,
+            "Voting period has ended"
+        );
+        require(!hasVoted[msg.sender][_pollId], "You have already voted");
+
+        emit VoteCast(_pollId, msg.sender, _songName);
     }
 }

@@ -3,7 +3,7 @@
     "node": "^22.7.0"
   },
   "name": "hardhat",
-  "description": "Final assignment for Smart Contract course in BCU23D. It is a voting system for favorite record.",
+  "description": "Final assignment for Smart Contract course in BCU23D. It is a voting system for favorite song.",
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {
