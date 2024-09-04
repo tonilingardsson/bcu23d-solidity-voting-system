@@ -3,6 +3,12 @@ pragma solidity ^0.8.0;
 
 contract VotingSystem {
     // Define the structures, variables, and mappings here
+
+    enum PollStatus {
+        NotStarted,
+        Ongoing,
+        Ended
+    }
     struct Poll {
         address creator;
         string[] songList;
@@ -17,14 +23,13 @@ contract VotingSystem {
     mapping(uint => Poll) public polls;
     mapping(address => mapping(uint => bool)) public hasVoted;
 
-    enum PollStatus {
-        NotStarted,
-        Ongoing,
-        Ended
-    }
-
     // Constructor
-    constructor() {
+    constructor(string[] memory _songList, uint _votingDuration) {
+        for (uint i = 0; i < _songList.length; i++) {
+            string memory song = _songList[i];
+            polls[pollCount].songList.push(song);
+            polls[pollCount].votes[song] = 0;
+        }
         // Initialize state variables if needed
     }
 
