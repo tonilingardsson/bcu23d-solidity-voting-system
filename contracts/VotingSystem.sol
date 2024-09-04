@@ -44,4 +44,21 @@ contract VotingSystem {
 
         emit PollCreated(pollCount, msg.sender);
     }
+
+    modifier onlyCreator(uint _pollId) {
+        require(
+            msg.sender == polls[_pollId].creator,
+            "Only the poll's creator can start this poll"
+        );
+        _;
+    }
+
+    function startPoll(uint _pollId) public onlyCreator(_pollId) {
+        require(polls[_pollId].isPollActive, "Poll is not active");
+        require(
+            block.timestamp >= polls[_pollId].startTime,
+            "Voting has nort started yet"
+        );
+        emit PollStarted(_pollId, block.timestamp);
+    }
 }
